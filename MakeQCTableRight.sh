@@ -84,4 +84,6 @@ done
 echo "\caption{Sample}" >> tablefileR.tex
 echo "\end{longtable}" >> tablefileR.tex
 echo "\end{landscape}" >> tablefileR.tex
+
+mv tablefileR.tex ./Mouse-plots-one/
 			

@@ -85,3 +85,4 @@ echo "\caption{Results from FASTQC analysis of paired end reads generated from }
 echo "\end{longtable}" >> tablefileL.tex
 echo "\end{landscape}" >> tablefileL.tex
 			
+mv tablefileL.tex ./Mouse-plots-one/
