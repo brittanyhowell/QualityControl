@@ -61,9 +61,6 @@ sed 's/ /*/g' summary.txt | awk 'FNR == 1 {print $3}' | sed 's;_; ;g' > name.txt
 # Print the PASS FAIL list for first 6 lines
 awk '{print $1}' summary.txt| sed -n 1,6p > PassFailOne.txt
 
-# Print the PASS FAIL list for next 6 lines
-awk '{print $1}' summary.txt| sed -n 7,12p > PassFailTwo.txt
-
 # Concatenate into a single line
 cat name.txt PassFailOne.txt >> Line1a.txt
 
@@ -81,8 +78,9 @@ rm Line1.txt
 
 done
 
-echo "\caption{Results from FASTQC analysis of paired end reads generated from }" >> tablefileL.tex
+echo "\caption{Results from FASTQC analysis of paired end reads generated from HenMT1 data. 6 of 12 parameters have been included, the latter 6 have been included in the following table. Failing parameters have accompanying plots.}" >> tablefileL.tex
 echo "\end{longtable}" >> tablefileL.tex
+echo "\label{QCRawL}" >> tablefileR.tex
 echo "\end{landscape}" >> tablefileL.tex
 			
 mv tablefileL.tex ./Mouse-plots-one/

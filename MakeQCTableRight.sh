@@ -13,7 +13,7 @@ fi
 echo "\begin{landscape}" >> tablefileR.tex
 echo "\begin{longtable}{ |p{5cm} | p{2cm} p{3cm} p{3cm} p{3cm} p{3cm} p{3cm}|}" >> tablefileR.tex
 echo "\hline" >> tablefileR.tex
-echo "Read Name & Basic Statistics & Per base sequence quality & Per tile sequence quality & Per sequence quality scores & Per base sequence content & Per sequence GC content  \\\\ " >> tablefileR.tex
+echo "Read Name & Per base N content & Sequence Length Distribution & Sequence Duplication Levels & Overrepresented sequences & Adapter Content & Kmer Content   \\\\ " >> tablefileR.tex
 echo "\hline\hline \endhead" >>tablefileR.tex
 echo "\hline \endfoot" >> tablefileR.tex
 
@@ -58,14 +58,11 @@ fi
 # Read the name of the sequence read
 sed 's/ /*/g' summary.txt | awk 'FNR == 1 {print $3}' | sed 's;_; ;g' > name.txt
 
-# Print the PASS FAIL list for first 6 lines
-awk '{print $1}' summary.txt| sed -n 1,6p > PassFailOne.txt
-
 # Print the PASS FAIL list for next 6 lines
 awk '{print $1}' summary.txt| sed -n 7,12p > PassFailTwo.txt
 
 # Concatenate into a single line
-cat name.txt PassFailOne.txt >> Line1a.txt
+cat name.txt PassFailTwo.txt >> Line1a.txt
 
 
 
@@ -81,7 +78,8 @@ rm Line1.txt
 
 done
 
-echo "\caption{Sample}" >> tablefileR.tex
+echo "\caption{Results from FASTQC analysis of paired end reads generated from HenMT1 data. Failing parameters have accompanying plots.}" >> tablefileR.tex
+echo "\label{QCRaw2}" >> tablefileR.tex
 echo "\end{longtable}" >> tablefileR.tex
 echo "\end{landscape}" >> tablefileR.tex
 
