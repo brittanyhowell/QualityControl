@@ -1,5 +1,9 @@
 #!/bin/bash
 
+dataDir=/Users/brittanyhowell/Documents/University/Honours_2016/Project/QualityControl/trimGalore
+
+echo "Initialising table"
+date
 
 if [ -f tablefileL.tex ]; then
 rm tablefileL.tex
@@ -18,7 +22,7 @@ echo "\hline\hline \endhead" >>tablefileL.tex
 echo "\hline \endfoot" >> tablefileL.tex
 
 
-for folder in ./Mouse-plots-one/Folders/* ; do
+for folder in ${dataDir}/Folders/* ; do
 
 cd ${folder}
 
@@ -63,11 +67,12 @@ awk '{print $1}' summary.txt| sed -n 1,6p > PassFailOne.txt
 
 # Concatenate into a single line
 cat name.txt PassFailOne.txt >> Line1a.txt
-
-
+rm name.txt
+rm PassFailOne.txt
 
 # Replace newlines with &s, replace final & with newline
 cat Line1a.txt | tr '\n' '&' | sed 's/&$/\\\\/'  > Line1.txt
+rm Line1a.txt
 
 # Move file to base directory and copy into table
 mv Line1.txt /Users/brittanyhowell/Documents/University/Honours_2016/Project/QualityControl
@@ -78,9 +83,12 @@ rm Line1.txt
 
 done
 
-echo "\caption{Results from FASTQC analysis of paired end reads generated from HenMT1 data. 6 of 12 parameters have been included, the latter 6 have been included in the following table. Failing parameters have accompanying plots.}" >> tablefileL.tex
+echo "\caption{Results from FASTQC analysis of HENMT1 read data after processing with Trim Galore.}" >> tablefileL.tex
 echo "\end{longtable}" >> tablefileL.tex
 echo "\label{QCRawL}" >> tablefileR.tex
 echo "\end{landscape}" >> tablefileL.tex
 			
-mv tablefileL.tex ./Mouse-plots-one/
+mv tablefileL.tex ${dataDir}	
+
+echo "Complete Left side"
+date
