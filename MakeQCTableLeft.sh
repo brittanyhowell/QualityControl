@@ -1,6 +1,7 @@
 #!/bin/bash
 
 dataDir=/Users/brittanyhowell/Documents/University/Honours_2016/Project/QualityControl/trimGalore
+#dataDir=/Users/brittanyhowell/Documents/University/Honours_2016/Project/QualityControl/Mouse-plots-one
 
 echo "Initialising table"
 date
@@ -16,6 +17,8 @@ fi
 # Write beginning of table information
 echo "\begin{landscape}" >> tablefileL.tex
 echo "\begin{longtable}{ |p{5cm} | p{2cm} p{3cm} p{3cm} p{3cm} p{3cm} p{3cm}|}" >> tablefileL.tex
+echo "\caption{Results from FASTQC analysis of HENMT1 read data after processing with Trim Galore.}\\\\" >> tablefileL.tex
+#echo "\caption{Results from FASTQC analysis of paired end reads generated from HenMT1 data.}\\\\" >> tablefileL.tex
 echo "\hline" >> tablefileL.tex
 echo "Read Name & Basic Statistics & Per base sequence quality & Per tile sequence quality & Per sequence quality scores & Per base sequence content & Per sequence GC content  \\\\ " >> tablefileL.tex
 echo "\hline\hline \endhead" >>tablefileL.tex
@@ -83,9 +86,10 @@ rm Line1.txt
 
 done
 
-echo "\caption{Results from FASTQC analysis of HENMT1 read data after processing with Trim Galore.}" >> tablefileL.tex
+#echo "\label{QCRawL}" >> tablefileL.tex
+echo "\label{QCTrimL}" >> tablefileL.tex
+
 echo "\end{longtable}" >> tablefileL.tex
-echo "\label{QCRawL}" >> tablefileR.tex
 echo "\end{landscape}" >> tablefileL.tex
 			
 mv tablefileL.tex ${dataDir}	
